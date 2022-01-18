@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .clearfix {
+            content: "";
+            display: block;
+            clear:both;
+        }
+        .parent {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .slider-wrap {
+            width: 80vw;
+            height: 80vh;
+            overflow: hidden;
+        }
+        .content {
+            float: left;
+        }
+        img {
+            width: 80vw;
+            height: 80vh;
+        }
+        button {
+            width: 80px;
+            height: 50px;
+            background: peachpuff;
+            border: none;
+            cursor: pointer;
+            margin: 0 30px;
+            
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="parent">
+        <button class="prev">PREV</button>
+        <div class="slider-wrap">
+            <div class="img-container clearfix">
+                <div class="content">
+                    <img src="../../IMAGE/japan-g332f0c56f_1920.jpg">
+                </div>
+                <div class="content">
+                    <img src="../../IMAGE/eiffel-tower-ga487ffd7a_1920.jpg">
+                </div>
+                <div class="content">
+                    <img src="../../IMAGE/lake-g72e1d21b4_1920.jpg">
+                </div>
+                <div class="content">
+                    <img src="../../IMAGE/forest-g36f7ba79f_1920.jpg">
+                </div>
+            </div>
+        </div>
+        <button class="next">NEXT</button>
+    </div>
+
+    <script>
+        
+        let prev = document.querySelector('.prev');
+        let next = document.querySelector('.next');
+        let parent = document.querySelector('.parent');
+        let imgCon = document.querySelector('.img-container');
+        let content = document.querySelectorAll('.content');
+        let conLen = content.length + 2; 
+
+
+        /*      copy first and last     */
+        let firstChild = imgCon.firstElementChild.cloneNode(true);
+        let lastChild = imgCon.lastElementChild.cloneNode(true);
+        imgCon.insertBefore(lastChild, imgCon.firstElementChild);
+        imgCon.appendChild(firstChild);
+        
+
+        let current = 0;
+        let SW = 80;
+        imgCon.style.width = (conLen) * SW + "vw";
+        imgCon.style.transform = "translateX(-"+ SW +"vw)";
+
+
+        next.onclick = function(){
+            if(current <= conLen - 3){
+                imgCon.style.transition = "0.2s"
+                imgCon.style.transform = "translateX(-"+ (SW * (current + 2)) +"vw)";
+            } 
+            if(current === conLen - 3){
+                setTimeout(function(){
+                    imgCon.style.transition = "0s";
+                    imgCon.style.transform = "translateX(-80vw)"
+                },201)
+                current = -1;
+            }
+            current++;
+        } 
+
+
+        prev.onclick = function(){
+            if(current >= 0){
+                imgCon.style.transition = "0.2s"
+                imgCon.style.transform = "translateX("+ (SW * (current + 1)) +"vw)";
+            }
+            if(current === conLen - 2){
+                setTimeout(function(){
+                    imgCon.style.transition = "0s";
+                    imgCon.style.transform = "translateX(400vw)"
+                },201)
+                current = conLen - 3;
+            }
+            current--;
+        }
+        
+
+    </script>
+</body>
+</html>

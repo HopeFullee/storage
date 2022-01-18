@@ -320,11 +320,11 @@ function select_3() {
 		clearLog(e);
 			
 		if(e.target.classList.contains('user-text')){
-			if(canvas.classList.contains('hide')){  // operate only when canvas has .hide from select_4 LINE:355
+			if(canvas.classList.contains('hide')){  // operate only when canvas has .hide from select_4 LINE:363
 				const monitor = document.querySelector('.monitor');
 				monitor.classList.remove('black-out');  // remove .black-out to show original BG
 				canvas.classList.remove('hide');  // remove .hide to show character 
-				monitor.classList.add('fade-in');  // add .fade-in to gradually show when clicked From select_5 LINE:409
+				monitor.classList.add('fade-in');  // add .fade-in to gradually show when clicked From select_5 LINE:427
 			}
 			
 			charState('idle', '100');
@@ -356,7 +356,7 @@ function select_4(){
 		}else if(e.target.classList.contains('B')){
 			charState('cry', '60');
 			const monitor = document.querySelector('.monitor');
-			monitor.classList.remove('fade-in'); // remove fade-in From select_3 LINE:321, and to reuse at select_4 LINE:357
+			monitor.classList.remove('fade-in'); // remove fade-in to reuse at select_4 LINE:365
 			monitor.classList.add('fade-out'); // fade-out original BG
 
 			setTimeout(() => {
@@ -681,8 +681,60 @@ function sliderLeave() {
 }
 
 
+/********************************		C A R O U S E L		S L I D E R			********************************/
+
+sliderControl.addEventListener('click', sliderClick);
+
+const sliderItem = document.querySelectorAll('.slider-item');
+const itemLength = sliderItem.length;
+
+let sliderPosition = 1;
+const sliderSize = slider.style.width = itemLength * 100 + "%";  // automaticly calculate and apply width for slider
+
+let itemSize = 0;
+for(let i=0; i<sliderItem.length; i++){
+	sliderItem[i].style.width = (100 / itemLength) + "%";  // automaticly calculate and apply width for items 
+	itemSize = sliderItem[i].style.width = (100 / itemLength);
+}
 
 
+
+function sliderClick(e) {
+	elem = e.target;
+
+	while(!elem.classList.contains('slider-button')){
+		elem = elem.parentNode;
+		if(elem.nodeName == "BODY") {
+			elem = null;
+			return;
+		}
+	}
+
+	if(elem.classList.contains('next')) {
+		
+		if(sliderPosition === itemLength){
+			sliderPosition = 0;
+			slider.style.transform = "translateX(-"+ sliderPosition * itemSize + "%)";
+		}else {
+			slider.style.transform = "translateX(-"+ sliderPosition * itemSize + "%)";
+		}
+
+		sliderPosition++;
+	}
+
+	if(elem.classList.contains('prev')) {
+		
+		if(sliderPosition === 1){
+			sliderPosition = itemLength - 1;
+			slider.style.transform = "translateX(-"+ sliderPosition * itemSize + "%)";
+			sliderPosition = itemLength + 1;
+		}else {
+			slider.style.transform = "translateX(-"+ (sliderPosition - 2) * itemSize + "%)";
+		}
+
+		sliderPosition--;
+	}
+}
 
 
 
