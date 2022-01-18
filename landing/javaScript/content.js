@@ -613,9 +613,9 @@ function select_9(){
 }
 
 
-/******************************************		I N T E R V I E W	 	 *************************************************/
-/******************************************		I N T E R V I E W	 	 *************************************************/
-/******************************************		I N T E R V I E W	 	 *************************************************/
+/******************************************		I N T E R V I E W	E N D 	 *************************************************/
+/******************************************		I N T E R V I E W	E N D 	 *************************************************/
+/******************************************		I N T E R V I E W	E N D 	 *************************************************/
 
 
 
@@ -630,6 +630,55 @@ function select_9(){
 
 
 
+
+
+/******************************************			G A L L E R Y  	  	  *************************************************/
+/******************************************			G A L L E R Y  	  	  *************************************************/
+/******************************************			G A L L E R Y  	  	  *************************************************/
+
+
+const slider = document.querySelector('.slider');
+const sliderControl = document.querySelector('.slider-control');
+
+let sliderTime;
+
+slider.addEventListener('mousemove', sliderHover);
+
+function sliderHover() {
+	clearTimeout(sliderTime);
+	sliderControl.classList.add('show');
+	sliderControl.classList.add('slider-in');
+	sliderControl.classList.remove('slider-out');
+	
+	sliderTime = setTimeout(() => {
+		sliderControl.classList.remove('slider-in');
+		sliderControl.classList.add('slider-out');
+		sliderTime = setTimeout(() => {
+			sliderControl.classList.remove('show');
+		}, 400);
+	}, 1000);
+}
+
+
+sliderControl.addEventListener('mouseenter', sliderEnter);
+
+function sliderEnter() {
+	clearTimeout(sliderTime);
+	sliderControl.classList.add('show');
+}
+
+
+sliderControl.addEventListener('mouseleave', sliderLeave);
+
+function sliderLeave() {
+	sliderTime = setTimeout(() => {
+		sliderControl.classList.remove('slider-in');
+		sliderControl.classList.add('slider-out');
+		sliderTime = setTimeout(() => {
+			sliderControl.classList.remove('show');
+		}, 400);
+	}, 1000);
+}
 
 
 
