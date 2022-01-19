@@ -681,22 +681,28 @@ function sliderLeave() {
 }
 
 
+
 /********************************		C A R O U S E L		S L I D E R			********************************/
+
 
 sliderControl.addEventListener('click', sliderClick);
 
+const sliderCounter = document.querySelector('.slider-counter');
 const sliderItem = document.querySelectorAll('.slider-item');
 const itemLength = sliderItem.length;
 
+
 let sliderPosition = 1;
-const sliderSize = slider.style.width = itemLength * 100 + "%";  // automaticly calculate and apply width for slider
+const sliderSize = slider.style.width = itemLength * 100 + "%";  // automatically calculate and apply width for slider
 
 let itemSize = 0;
 for(let i=0; i<sliderItem.length; i++){
-	sliderItem[i].style.width = (100 / itemLength) + "%";  // automaticly calculate and apply width for items 
+	sliderItem[i].style.width = (100 / itemLength) + "%";  // automatically calculate and apply width for items 
 	itemSize = sliderItem[i].style.width = (100 / itemLength);
 }
 
+let count = document.createTextNode(sliderPosition +' / '+ itemLength);
+	sliderCounter.appendChild(count);  // create (count) node here for DEFAULT and will be removed from LINE:748 
 
 
 function sliderClick(e) {
@@ -734,7 +740,16 @@ function sliderClick(e) {
 
 		sliderPosition--;
 	}
+	
+	let count = document.createTextNode(sliderPosition +' / '+ itemLength);
+	sliderCounter.appendChild(count);  // create second (count) and append to (sliderCounter)
+
+	if(sliderCounter.contains(count)) {  // remove the first DEFAULT (count) from LINE:704
+		sliderCounter.removeChild(sliderCounter.firstChild); 
+	}
 }
+
+
 
 
 
