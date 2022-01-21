@@ -627,27 +627,20 @@ function select_9(){
 
 
 
+function sliderSelector(i){
+
+/********************************		S L I D E R		B U T T O N S		 ********************************/
+/********************************		S L I D E R		B U T T O N S		 ********************************/
+
+	const slider = document.querySelectorAll('.slider');
+	const sliderControl = document.querySelectorAll('.slider-control');
 
 
+	slider[i].addEventListener('mousemove', sliderHover);	// hover event for (slider) 
 
+	let sliderTime;
 
-
-/***********************************************			G A L L E R Y  	  	  *************************************************/
-/***********************************************			G A L L E R Y  	  	  *************************************************/
-/***********************************************			G A L L E R Y  	  	  *************************************************/
-
-
-const slider = document.querySelectorAll('.slider');
-const sliderControl = document.querySelectorAll('.slider-control');
-
-let sliderTime;
-
-slider[0].addEventListener('mousemove', sliderHover);	// portfolio slider hover event 
-slider[1].addEventListener('mousemove', sliderHover);	// gallery slider hover event 
-
-
-function sliderHover() {
-	for(let i=0; i < sliderControl; i++){
+	function sliderHover() {
 		clearTimeout(sliderTime);
 		sliderControl[i].classList.add('show');
 		sliderControl[i].classList.add('slider-in');
@@ -661,25 +654,19 @@ function sliderHover() {
 			}, 400);
 		}, 1000);
 	}
-}
 
 
-sliderControl[0].addEventListener('mouseenter', sliderBtnEnter);	// portfolio slider button enter 
-sliderControl[1].addEventListener('mouseenter', sliderBtnEnter); 	// gallery slider button enter
+	sliderControl[i].addEventListener('mouseenter', sliderBtnEnter);	// mouse enter event for (slider-button)
 
-function sliderBtnEnter() {
-	clearTimeout(sliderTime);
-	for(let i=0; i < sliderControl; i++){
+	function sliderBtnEnter() {
+		clearTimeout(sliderTime);
 		sliderControl[i].classList.add('show');
 	}
-}
 
 
-sliderControl[0].addEventListener('mouseleave', sliderBtnLeave);	// portfolio slider button leave
-sliderControl[1].addEventListener('mouseleave', sliderBtnLeave);	// gallery slider button leave
+	sliderControl[i].addEventListener('mouseleave', sliderBtnLeave);	// mouse leave event for (slider-button)
 
-function sliderBtnLeave() {
-	for(let i=0; i < sliderControl; i++) {
+	function sliderBtnLeave() {
 		sliderTime = setTimeout(() => {
 			sliderControl[i].classList.remove('slider-in');
 			sliderControl[i].classList.add('slider-out');
@@ -688,112 +675,93 @@ function sliderBtnLeave() {
 			}, 400);
 		}, 1000);
 	}
-}
 
+/*************************************		S L I D E R		F R A M E	  C O N T R O L     *************************************/
+/*************************************		S L I D E R		F R A M E	  C O N T R O L     *************************************/
 
-
-/********************************		C A R O U S E L		S L I D E R			********************************/
-
-
-
-/*	 EXECUTE and APPEND cloneNode BEFORE querySelecting(.slider-item) at LINE:698	*/
-for(let i=0; i < slider.length; i++) {
+	/*	 EXECUTE and APPEND cloneNode BEFORE querySelecting(.slider-item) at LINE:688	*/
 	const copyFirst = slider[i].firstElementChild.cloneNode(true);
 	const copyLast = slider[i].lastElementChild.cloneNode(true);  // copy first and last (item) from (slider) and,
 	slider[i].insertBefore(copyLast, slider[i].firstElementChild);   // append two of (cloneNodes) to (slider) on opposite direction.
 	slider[i].appendChild(copyFirst);
-}
-	
-
-const sliderCounter = document.querySelectorAll('.slider-counter');
-const P_item = slider[0].querySelectorAll('.slider-item');  // DON'T CHANGE LINE 
-const G_item = slider[1].querySelectorAll('.slider-item');  // DON'T CHANGE LINE 
-const P_length = P_item.length;
-const G_length = G_item.length;
-
-let P_itemWidth = 0;
-for(let i=0; i<P_item.length; i++){
-	P_itemWidth = P_item[i].style.width = (100 / P_length) + "%";  // automatically calculate and apply width for items  
-}
-let G_itemWidth = 0;
-for(let i=0; i<G_item.length; i++){
-	G_itemWidth = G_item[i].style.width = (100 / G_length) + "%";  // automatically calculate and apply width for items 
-}
 
 
-const P_sliderWidth = slider[0].style.width = P_length * 100 + "%";  // automatically calculate and apply width for (Portfolio-Slider)
-const G_sliderWidth = slider[1].style.width = G_length * 100 + "%";  // automatically calculate and apply width for (Gallery-Slider)
-slider[0].style.transform = "translateX(-"+ P_itemWidth +")" // first item position for (Portfolio)
-slider[1].style.transform = "translateX(-"+ G_itemWidth +")" // first item position for (gallery)
+	const sliderCounter = document.querySelectorAll('.slider-counter');
+	const sliderItem = slider[i].querySelectorAll('.slider-item');  // DON'T CHANGE LINE 
+	const itemLength = sliderItem.length;
 
 
-let sliderPosition = 1;
-
-const P_counter = document.createTextNode((sliderPosition) +' / '+ (P_length - 2)); // subtract 2 (cloneNodes)'s LENGTH from LINE:690
-const G_counter = document.createTextNode((sliderPosition) +' / '+ (G_length - 2)); // subtract 2 (cloneNodes)'s LENGTH from LINE:690
-sliderCounter[0].appendChild(P_counter);  // create DEFAULT (counter) node for (Portfolio), and will be removed at LINE:748 
-sliderCounter[1].appendChild(G_counter);  // create DEFAULT (counter) node for (Gallery), and will be removed at LINE:748 
-
-
-sliderControl[0].addEventListener('click', sliderClick);	// portfolio slider click event
-sliderControl[1].addEventListener('click', sliderClick());	// gallery slider click event
-function sliderClick(e, itemWidth) {
-	elem = e.target;
-
-	while(!elem.classList.contains('slider-button')){
-		elem = elem.parentNode;
-		if(elem.nodeName == "BODY") {
-			elem = null;
-			return; 
-		}
+	let itemWidth = 0;
+	for(let j=0; j < itemLength; j++){
+		sliderItem[j].style.width = (100 / itemLength) + "%";  // automatically calculate and apply width for (items)  
+		itemWidth = sliderItem[j].style.width = (100 / itemLength);
 	}
 
-	if(elem.classList.contains('next-btn')) {
-		
-		slider[1].style.transition = "0.8s ease";
-		slider[1].style.transform = "translateX(-"+ (sliderPosition + 1) * itemWidth + ")";
+	const sliderWidth = slider[i].style.width = itemLength * 100 + "%";  // automatically calculate and apply width for (Slider)
+	slider[i].style.transform = "translateX(-"+ itemWidth +"%)" // first item position for (slider)
 
-		if(sliderPosition === (itemLength - 2)){ 
-			sliderPosition = 0;  // set (sPosition) to (0) here, and will eventually become (1) at LINE:743
-			sliderControl.style.pointerEvents = "none";  // prevent spam clicking so the (counter) does not surpass (itemLength)
-			setTimeout(() => {
-				slider.style.transition = "0s";
-				sliderControl.style.pointerEvents = "auto";
-				slider.style.transform = "translateX(-"+ sliderPosition * itemWidth + ")";
-			}, 750);
+
+	let sliderPosition = 1;
+
+	const counter = document.createTextNode((sliderPosition) +' / '+ (itemLength - 2)); // subtract 2 (cloneNodes)'s LENGTH from LINE:685
+	sliderCounter[i].appendChild(counter);  // create DEFAULT (counter) node, and will be removed at LINE:760 
+
+
+	sliderControl[i].addEventListener('click', sliderBtnClick);	//  click event for (slider-buttons)
+
+	function sliderBtnClick(e) {
+		elem = e.target;
+
+		while(!elem.classList.contains('slider-button')){
+			elem = elem.parentNode;
+			if(elem.nodeName == "BODY") {
+				elem = null;
+				return; 
+			}
 		}
-		sliderPosition++;
+
+		if(elem.classList.contains('next-btn')) {
+			
+			slider[i].style.transition = "0.8s ease";
+			slider[i].style.transform = "translateX(-"+ (sliderPosition + 1) * itemWidth + "%)";
+
+			if(sliderPosition === (itemLength - 2)){ 
+				sliderPosition = 0;  // set (sPosition) to (0) here, and will eventually become (1) at LINE:737
+				sliderControl[i].style.pointerEvents = "none";  // prevent spam clicking so the (counter) does not surpass (itemLength)
+				setTimeout(() => {
+					slider[i].style.transition = "0s";
+					sliderControl[i].style.pointerEvents = "auto";
+					slider[i].style.transform = "translateX(-"+ sliderPosition * itemWidth + "%)";
+				}, 750);
+			}
+			sliderPosition++;
+		}
+
+		if(elem.classList.contains('prev-btn')) {
+			
+			slider[i].style.transition = "0.8s ease" 
+			slider[i].style.transform = "translateX(-"+ (sliderPosition - 1) * itemWidth + "%)";
+			
+			if(sliderPosition === 1){
+				sliderPosition = itemLength - 1;  // subtract (-1) from (itemLength) here and will additionally (-1) again at LINE:753
+				sliderControl[i].style.pointerEvents = "none";  // prevent spam clicking so the (counter) does not go below (1) 
+				setTimeout(()=> {
+					slider[i].style.transition = "0s";
+					sliderControl[i].style.pointerEvents = "auto";
+					slider[i].style.transform = "translateX(-"+ sliderPosition * itemWidth + "%)";
+				}, 750);
+			}
+			sliderPosition--;
+		}
+		
+		const counter = document.createTextNode((sliderPosition)+' / '+ (itemLength - 2)); // subtract 2 (cloneNodes)'s LENGTH from LINE:685
+		sliderCounter[i].appendChild(counter);  // create after (counter) and append to (sliderCounter)
+
+		if(sliderCounter[i].contains(counter)) {  // remove before (counter) from LINE:705
+			sliderCounter[i].removeChild(sliderCounter[i].firstChild); 
+		}
 	}
-
-	if(elem.classList.contains('prev-btn')) {
-		
-		slider.style.transition = "0.8s ease" 
-		slider.style.transform = "translateX(-"+ (sliderPosition - 1) * itemWidth + "%)";
-		
-		if(sliderPosition === 1){
-			sliderPosition = itemLength - 1;  // subtract (-1) from (itemLength) here and will additionally (-1) again at LINE:761 
-			sliderControl.style.pointerEvents = "none";  // prevent spam clicking so the (counter) does not go below (1) 
-			setTimeout(()=> {
-				slider.style.transition = "0s";
-				sliderControl.style.pointerEvents = "auto";
-				slider.style.transform = "translateX(-"+ sliderPosition * itemWidth + "%)";
-			}, 750);
-		}
-		
-		sliderPosition--;
-	}
-	
-		const counter = document.createTextNode((sliderPosition)+' / '+ (itemLength - 2)); // subtract 2 (cloneNodes) at LINE:690
-		sliderCounter.appendChild(counter);  // create after (counter) and append to (sliderCounter)
-
-		if(sliderCounter.contains(counter)) {  // remove before (counter) from LINE:704
-			sliderCounter.removeChild(sliderCounter.firstChild); 
-		}
 }
-
-
-
-
 
 
 

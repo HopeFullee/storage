@@ -18,6 +18,7 @@ function clickHandler(e) {
 			return;
 		}
 	}
+
 	for(i=0; i<menu.length; i++) {
 		mTitle[i].classList.add('hide');
 		if(elem.dataset.value == (i+1)) {
@@ -26,6 +27,12 @@ function clickHandler(e) {
 			menu[i].classList.add('expand');
 			doSetTimeout(i);
 		}
+	}
+
+	if(elem.dataset.value == 1){
+		sliderSelector(0)
+	}else if(elem.dataset.value == 3){
+		sliderSelector(1)
 	}
 }
 
@@ -153,7 +160,6 @@ function rainHandler(){
 		mTitle[2].classList.remove('menu-hover')
 	}
 }
-
 
 
 
