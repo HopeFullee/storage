@@ -624,23 +624,22 @@ function select_9(){
 
 
 
+/********************************		S L I D E R		B U T T O N S		 ********************************/
+/********************************		S L I D E R		B U T T O N S		 ********************************/
+
 
 
 
 function sliderSelector(i){
 
-/********************************		S L I D E R		B U T T O N S		 ********************************/
-/********************************		S L I D E R		B U T T O N S		 ********************************/
-
 	const slider = document.querySelectorAll('.slider');
 	const sliderControl = document.querySelectorAll('.slider-control');
-
 
 	slider[i].addEventListener('mousemove', sliderHover);	// hover event for (slider) 
 
 	let sliderTime;
 
-	function sliderHover() {
+	function sliderHover(e) {
 		clearTimeout(sliderTime);
 		sliderControl[i].classList.add('show');
 		sliderControl[i].classList.add('slider-in');
@@ -651,8 +650,8 @@ function sliderSelector(i){
 			sliderControl[i].classList.add('slider-out');
 			sliderTime = setTimeout(() => {
 				sliderControl[i].classList.remove('show');
-			}, 400);
-		}, 1000);
+				}, 400);
+			}, 1000);
 	}
 
 
@@ -676,8 +675,8 @@ function sliderSelector(i){
 		}, 1000);
 	}
 
-/*************************************		S L I D E R		F R A M E	  C O N T R O L     *************************************/
-/*************************************		S L I D E R		F R A M E	  C O N T R O L     *************************************/
+	/*************************************		S L I D E R		F R A M E	  C O N T R O L     *************************************/
+	/*************************************		S L I D E R		F R A M E	  C O N T R O L     *************************************/
 
 	/*	 EXECUTE and APPEND cloneNode BEFORE querySelecting(.slider-item) at LINE:688	*/
 	const copyFirst = slider[i].firstElementChild.cloneNode(true);
@@ -762,8 +761,6 @@ function sliderSelector(i){
 		}
 	}
 }
-
-
 
 
 
