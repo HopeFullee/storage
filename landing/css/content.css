@@ -13,6 +13,7 @@
     display: none;
     justify-content: center;
     align-items: center;
+    background-image: url('../img/main-page-blur.jpg');
 }
 
 .con-border {
@@ -55,6 +56,8 @@
     cursor: pointer;
 }
 
+
+
 .back-btn:before {
     content: '';
     position: absolute;
@@ -93,7 +96,6 @@
 /************************     P O R T F O L I O     ************************/
 
 
-
 .pf-item {
     font-family: 'Metropolis', sans-serif;
     width: 100%;
@@ -112,60 +114,70 @@
 
 
 .pf-thumbnail > h3 {
+    color:  #2e3031;
     font-size: 44px;
     height: 10%;
-    margin-bottom: 5px;
 }
 
-.pf-thumbnail > img {
-    object-fit: cover;
+.pf-thumbnail img {
+    object-fit: contain;
     width: 100%;
     height: 90%;
+}
+
+.pf-thumbnail > p {
+    font-family: 'MaruBuri', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
 }
 
 .pf-sum {
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 60px;
 }
 
 .pf-sum > h4 {
     font-size: 34px;
+    color: #262829;
 }
 
 .pf-sum > p {
-    font-size: 16.5px;
-    line-height: 26px;
+    font-family: 'MaruBuri', sans-serif;
+    font-size: 18px;
+    line-height: 28px;
     margin-top: 10px;
 }
 
 .pf-right {
-    width: 35%;
+    width: 25%;
     height: 100%;
     display: flex;
     flex-direction: column;
-    margin-top: 95px;
+    margin-top: 100px;
 }
 
 .pf-right h4 {
     font-size: 34px;
     font-weight: bold;
     letter-spacing: 1px;
-    border-bottom: 3px solid black;
-}
-
-.pf-right p {
-    font-size: 24px;
-    letter-spacing: 0.5px;
-    margin-top: 10px;
+    color:  #262829;
+    border-bottom: 3px solid #262829;
 }
 
 .pf-concept {
-    height: 23%;
+    height: 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+.pf-concept > p {
+    font-size: 24px;
+    letter-spacing: 0.5px;
+    color:  #262829;
+    margin-top: 15px;
 }
 
 .pf-skill {
@@ -173,22 +185,25 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.pf-skill > img {
     margin-top: 10px;
 }
 
+.pf-skill > img {
+    width: 300px;
+    margin-top: 12px;
+}
+
 .pf-document {
-    margin-top: 50px;
     height: 25%;
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 10px;
 }
 
 .pf-document > img {
-    margin-top: 10px;
+    width: 86px;
+    margin-top: 12px;
 }
 
 
@@ -349,6 +364,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    
 }
 
 .slider-item {
@@ -377,7 +393,7 @@
     height: 100%;
     border: none;
     padding: 0;
-    background-color: rgba(150, 150, 150, .2);
+    background-color: rgba(200, 200, 200, .5);
     top:0;
 }
 

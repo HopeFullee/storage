@@ -374,7 +374,7 @@ function select_4(){
 						select_5();
 					}, 5500);
 				}, 2000);
-			}, 2400);
+			}, 1400);
 
 		}else if(e.target.classList.contains('C')){
 			charState('old', '40', 'after', 'old', '40', '20000');
